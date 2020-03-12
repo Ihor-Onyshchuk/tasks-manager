@@ -6,15 +6,11 @@ import "./App.scss";
 import ItemStatusFilter from "../ItemStatusFilter/ItemStatusFilter";
 import ItemAddForm from "../ItemAddForm/ItemAddForm";
 
-export default class App extends Component {
-  maxId = 100;
+const uuid = () => `uuid${Date.now().toString(16)}`;
 
+export default class App extends Component {
   state = {
-    todoData: [
-      this.createTodoItem("Drink Coffee"),
-      this.createTodoItem("Make Awesome App"),
-      this.createTodoItem("Have a lunch")
-    ],
+    todoData: [this.createTodoItem("Drink Coffee")],
     term: ""
   };
 
@@ -23,7 +19,7 @@ export default class App extends Component {
       label,
       important: false,
       done: false,
-      id: this.maxId++
+      id: uuid()
     };
   }
 
@@ -51,7 +47,7 @@ export default class App extends Component {
     });
   };
 
-  toggleProperty(arr, id, propName) {
+  updateProperty(arr, id, propName) {
     const idx = arr.findIndex(el => el.id === id);
 
     // 1. update obj
@@ -65,7 +61,7 @@ export default class App extends Component {
   onToggleImportant = id => {
     this.setState(({ todoData }) => {
       return {
-        todoData: this.toggleProperty(todoData, id, "important")
+        todoData: this.updateProperty(todoData, id, "important")
       };
     });
   };
@@ -73,7 +69,7 @@ export default class App extends Component {
   onToggleDone = id => {
     this.setState(({ todoData }) => {
       return {
-        todoData: this.toggleProperty(todoData, id, "done")
+        todoData: this.updateProperty(todoData, id, "done")
       };
     });
   };
