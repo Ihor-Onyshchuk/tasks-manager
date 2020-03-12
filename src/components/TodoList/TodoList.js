@@ -1,11 +1,11 @@
 import React from "react";
 import "./TodoList.scss";
-import TodoItem from "../TodoItem/TodoItem";
+import TodoListItem from "../TodoListItem/TodoListItem";
 
 const TodoList = ({ todos, ...otherProps }) => (
   <ul className="list-group todo-list">
     {todos.map(item => (
-      <TodoItem key={item.id} todoItem={item} {...otherProps} />
+      <TodoListItem key={item.id} todoItem={item} {...otherProps} />
     ))}
   </ul>
 );
