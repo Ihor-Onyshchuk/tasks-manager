@@ -1,12 +1,7 @@
 import React, { Component } from "react";
-import "./todo-list-item.css";
+import "./TodoListItem.scss";
 
 export default class TodoListItem extends Component {
-  state = {
-    done: false,
-    important: false
-  };
-
   render() {
     const {
       label,

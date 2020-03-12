@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import TodoList from "../todo-list";
-import AppHeader from "../app-header";
-import SearchPanel from "../search-panel";
-import "./app.css";
-import ItemStatusFilter from "../item-status-filter";
-import ItemAddForm from "../item-add-form/item-add-form";
+import TodoList from "../TodoList/TodoList";
+import AppHeader from "../AppHeader/AppHeader";
+import SearchPanel from "../SearchPanel/SearchPanel";
+import "./App.scss";
+import ItemStatusFilter from "../ItemStatusFilter/ItemStatusFilter";
+import ItemAddForm from "../ItemAddForm/ItemAddForm";
 
 export default class App extends Component {
   maxId = 100;

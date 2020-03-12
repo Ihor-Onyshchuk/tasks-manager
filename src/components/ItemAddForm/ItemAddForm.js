@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./item-add-form.css";
+import "./ItemAddForm.scss";
 
 export default class ItemAddForm extends Component {
   state = {

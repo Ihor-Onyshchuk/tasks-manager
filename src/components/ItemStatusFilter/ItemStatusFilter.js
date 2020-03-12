@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./item-status-filter.css";
+import "./ItemStatusFilter.scss";
 
 export default class ItemStatusFilter extends Component {
   render() {
