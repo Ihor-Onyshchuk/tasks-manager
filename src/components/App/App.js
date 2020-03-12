@@ -5,13 +5,15 @@ import SearchPanel from "../SearchPanel/SearchPanel";
 import "./App.scss";
 import ItemStatusFilter from "../ItemStatusFilter/ItemStatusFilter";
 import ItemAddForm from "../ItemAddForm/ItemAddForm";
+import { render } from "react-dom";
 
 const uuid = () => `uuid${Date.now().toString(16)}`;
 
 export default class App extends Component {
   state = {
     todoData: [this.createTodoItem("Drink Coffee")],
-    term: ""
+    term: "",
+    filter: "active" // all, active, done
   };
 
   createTodoItem(label) {
@@ -85,9 +87,24 @@ export default class App extends Component {
     );
   }
 
+  filter(items, filter) {
+    switch (filter) {
+      case "all":
+        return items;
+      case "active":
+        return items.filter(item => !item.done);
+      case "done":
+        return items.filter(item => item.done);
+      default:
+        return items;
+    }
+  }
+
   render() {
-    const { todoData, term } = this.state;
-    const visibleItems = this.search(todoData, term);
+    const { todoData, term, filter } = this.state;
+
+    const visibleItems = this.filter(this.search(todoData, term), filter);
+
     const doneCount = todoData.filter(el => el.done).length;
     const todoCount = todoData.length - doneCount;
     return (
