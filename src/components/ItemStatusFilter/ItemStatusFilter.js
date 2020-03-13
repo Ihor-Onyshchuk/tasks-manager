@@ -9,10 +9,10 @@ const buttons = [
 
 export default class ItemStatusFilter extends Component {
   render() {
-    const { filter, onFilterChange } = this.props;
+    const { handleFilter, onFilterChange } = this.props;
 
     const renderButtons = buttons.map(({ name, label }) => {
-      const isActive = filter === name;
+      const isActive = handleFilter === name;
       const clazz = isActive ? "btn-info" : "btn-outline-secondary";
 
       return (

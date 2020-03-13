@@ -5,7 +5,6 @@ import SearchPanel from "../SearchPanel/SearchPanel";
 import "./App.scss";
 import ItemStatusFilter from "../ItemStatusFilter/ItemStatusFilter";
 import ItemAddForm from "../ItemAddForm/ItemAddForm";
-import { render } from "react-dom";
 
 const uuid = () => `uuid${Date.now().toString(16)}`;
 
@@ -80,14 +79,14 @@ export default class App extends Component {
     this.setState({ term });
   };
 
-  search(items, term) {
+  handleSearch(items, term) {
     if (term.length === 0) return items;
     return items.filter(item =>
       item.label.toLowerCase().includes(term.toLowerCase())
     );
   }
 
-  filter(items, filter) {
+  handleFilter(items, filter) {
     switch (filter) {
       case "all":
         return items;
@@ -107,7 +106,10 @@ export default class App extends Component {
   render() {
     const { todoData, term, filter } = this.state;
 
-    const visibleItems = this.filter(this.search(todoData, term), filter);
+    const visibleItems = this.handleFilter(
+      this.handleSearch(todoData, term),
+      filter
+    );
     const doneCount = todoData.filter(el => el.done).length;
     const todoCount = todoData.length - doneCount;
     return (
@@ -118,7 +120,7 @@ export default class App extends Component {
 
           <ItemStatusFilter
             onFilterChange={this.onFilterChange}
-            filter={filter}
+            handleFilter={filter}
           />
         </div>
         <TodoList
