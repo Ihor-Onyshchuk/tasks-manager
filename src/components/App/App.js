@@ -13,7 +13,7 @@ export default class App extends Component {
   state = {
     todoData: [this.createTodoItem("Drink Coffee")],
     term: "",
-    filter: "active" // all, active, done
+    filter: "all" // all, active, done
   };
 
   createTodoItem(label) {
