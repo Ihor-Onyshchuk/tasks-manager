@@ -104,7 +104,6 @@ export default class App extends Component {
     const { todoData, term, filter } = this.state;
 
     const visibleItems = this.filter(this.search(todoData, term), filter);
-
     const doneCount = todoData.filter(el => el.done).length;
     const todoCount = todoData.length - doneCount;
     return (
