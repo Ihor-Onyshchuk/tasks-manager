@@ -11,7 +11,8 @@ const uuid = () => `uuid${Date.now().toString(16)}`;
 export default class App extends Component {
   state = {
     todoData: [this.createTodoItem("Drink Coffee")],
-    term: ""
+    term: "",
+    filter: "all" // all, active, done
   };
 
   createTodoItem(label) {
@@ -78,16 +79,37 @@ export default class App extends Component {
     this.setState({ term });
   };
 
-  search(items, term) {
+  handleSearch(items, term) {
     if (term.length === 0) return items;
     return items.filter(item =>
       item.label.toLowerCase().includes(term.toLowerCase())
     );
   }
 
+  handleFilter(items, filter) {
+    switch (filter) {
+      case "all":
+        return items;
+      case "active":
+        return items.filter(item => !item.done);
+      case "done":
+        return items.filter(item => item.done);
+      default:
+        return items;
+    }
+  }
+
+  onFilterChange = filter => {
+    this.setState({ filter });
+  };
+
   render() {
-    const { todoData, term } = this.state;
-    const visibleItems = this.search(todoData, term);
+    const { todoData, term, filter } = this.state;
+
+    const visibleItems = this.handleFilter(
+      this.handleSearch(todoData, term),
+      filter
+    );
     const doneCount = todoData.filter(el => el.done).length;
     const todoCount = todoData.length - doneCount;
     return (
@@ -95,7 +117,11 @@ export default class App extends Component {
         <AppHeader toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
           <SearchPanel onSearchChange={this.onSearchChange} />
-          <ItemStatusFilter />
+
+          <ItemStatusFilter
+            onFilterChange={this.onFilterChange}
+            handleFilter={filter}
+          />
         </div>
         <TodoList
           todos={visibleItems}
