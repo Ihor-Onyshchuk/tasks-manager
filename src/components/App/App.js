@@ -100,6 +100,10 @@ export default class App extends Component {
     }
   }
 
+  onFilterChange = filter => {
+    this.setState({ filter });
+  };
+
   render() {
     const { todoData, term, filter } = this.state;
 
@@ -111,7 +115,11 @@ export default class App extends Component {
         <AppHeader toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
           <SearchPanel onSearchChange={this.onSearchChange} />
-          <ItemStatusFilter />
+
+          <ItemStatusFilter
+            onFilterChange={this.onFilterChange}
+            filter={filter}
+          />
         </div>
         <TodoList
           todos={visibleItems}
