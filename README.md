@@ -3,7 +3,4 @@
 
 You can look at it [here](https://ihor-onyshchuk.github.io/Todo-App/ )
 ---
-![cover for app]("Cover of simple layout")
-
-
-![cover for app]("Cover of simple layout")
+![cover for app](https://github.com/Ihor-Onyshchuk/Todo-App/blob/master/Todo-app-preview.png "Cover of simple layout")
